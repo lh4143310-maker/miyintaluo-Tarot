@@ -1,0 +1,109 @@
+<scroll-view class="container" scroll-y>
+  <view class="header">
+    <view class="spread-name">{{spread.name || '塔罗测算'}}</view>
+    <view class="question-card">
+      <view class="question-label">您的问题</view>
+      <view class="question-text">{{question || ''}}</view>
+    </view>
+  </view>
+
+  <view class="cards-section" wx:if="{{cards && cards.length > 0}}">
+    <view class="section-title">抽牌结果</view>
+    <view class="result-cards">
+      <view class="result-card-item" wx:for="{{cards}}" wx:key="index">
+        <view class="card-position-label" wx:if="{{spread.positions && spread.positions[index]}}">{{spread.positions[index].name}}</view>
+        <!-- 可点击跳转的牌面 -->
+        <view class="result-card clickable" bindtap="viewCardDetail" data-card="{{item}}">
+          <view class="result-card-image">
+            <image wx:if="{{item.image}}" class="card-img" src="{{item.image}}" mode="aspectFill"></image>
+            <view wx:else class="result-card-placeholder">
+              <view class="result-placeholder-deco">✦</view>
+              <view class="result-placeholder-name">{{item.name}}</view>
+            </view>
+          </view>
+          <view class="result-card-main">
+            <view class="result-card-name">{{item.name}}</view>
+            <view class="result-card-position {{item.isReversed ? 'reversed' : ''}}">
+              {{item.isReversed ? '逆位' : '正位'}}
+            </view>
+          </view>
+          <view class="card-detail-hint">点击查看详情</view>
+        </view>
+        <view class="card-desc" wx:if="{{spread.positions && spread.positions[index]}}">{{spread.positions[index].description}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="interpretation-section">
+    <view class="section-title">牌面解读</view>
+    <view class="card-interpretations">
+      <view class="card-interpretation" wx:for="{{cards}}" wx:key="index">
+        <view class="interpretation-header">
+          <view class="interpretation-name">{{item.name}} - {{item.isReversed ? '逆位' : '正位'}}</view>
+        </view>
+        <view class="interpretation-content">{{item.isReversed ? item.reversed : item.upright}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI 解读报告 -->
+  <view class="ai-report-section">
+    <view class="section-title ai-title" bindtap="toggleAIReport">
+      <text>✦ AI 深度解读 ✦</text>
+      <view class="toggle-icon {{showAIReport ? 'open' : ''}}">v</view>
+    </view>
+    
+    <!-- 加载状态 -->
+    <view class="ai-loading" wx:if="{{loadingAI}}">
+      <view class="loading-spinner"></view>
+      <view class="loading-text">AI 正在为您解读牌面...</view>
+    </view>
+    
+    <!-- AI 报告内容 -->
+    <view class="ai-report-content {{showAIReport ? 'show' : ''}}" wx:if="{{!loadingAI}}">
+      <view class="ai-report-text" wx:if="{{aiReport}}">{{aiReport}}</view>
+      <view class="ai-report-placeholder" wx:if="{{!aiReport}}">
+        <view class="placeholder-text">AI 解读加载失败，请检查网络连接后重试</view>
+        <view class="retry-btn" bindtap="getAIReport">重新获取</view>
+      </view>
+    </view>
+    
+    <!-- 进一步咨询 -->
+    <view class="consult-section" wx:if="{{aiReport && !loadingAI}}">
+      <view class="consult-title">还想了解更多？</view>
+      <view class="consult-input-area">
+        <textarea 
+          class="consult-input" 
+          placeholder="输入您想进一步了解的问题，例如：这段感情我该如何经营？"
+          value="{{consultQuestion}}"
+          bindinput="onConsultInput"
+          maxlength="200"
+        />
+        <button class="consult-btn {{consultQuestion ? 'active' : ''}} {{loadingConsult ? 'loading' : ''}}" bindtap="sendConsult" disabled="{{loadingConsult}}">
+          {{loadingConsult ? 'AI 思考中...' : '向 AI 提问'}}
+        </button>
+      </view>
+      
+      <!-- 咨询历史 -->
+      <view class="consult-history" wx:if="{{consultHistory.length > 0}}">
+        <view class="history-title">咨询记录</view>
+        <view class="history-list">
+          <view class="history-item" wx:for="{{consultHistory}}" wx:key="index">
+            <view class="history-question">问：{{item.question}}</view>
+            <view class="history-answer">答：<text class="answer-text">{{item.answer}}</text></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="actions-section">
+    <button class="action-btn retry-btn" bindtap="retry">重新测算</button>
+  </view>
+
+  <view class="compliance-footer">
+    <view class="compliance-text">
+      温馨提示：本小程序测算结果仅供娱乐参考，不构成任何决策建议，请理性对待
+    </view>
+  </view>
+</scroll-view>

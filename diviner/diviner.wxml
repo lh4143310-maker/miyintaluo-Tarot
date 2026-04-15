@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="header">
+    <view class="title">占卜师工具</view>
+    <view class="subtitle">专业辅助工具</view>
+  </view>
+
+  <view class="menu-list">
+    <view class="menu-item" bindtap="goToCardParser">
+      <view class="menu-icon">🎴</view>
+      <view class="menu-content">
+        <view class="menu-title">牌面解析</view>
+        <view class="menu-desc">查看塔罗牌基础含义与正逆位解析</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+
+    <view class="menu-item" bindtap="goToCustomSpread">
+      <view class="menu-icon">✡</view>
+      <view class="menu-content">
+        <view class="menu-title">自定义牌阵</view>
+        <view class="menu-desc">创建和管理专属的牌阵</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="compliance-footer">
+    <view class="compliance-text">
+      温馨提示：本小程序测算结果仅供娱乐参考，不构成任何决策建议，请理性对待
+    </view>
+  </view>
+</view>

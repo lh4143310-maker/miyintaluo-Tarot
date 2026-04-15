@@ -1,0 +1,103 @@
+<view class="container">
+  <!-- 动态背景装饰层 -->
+  <view class="bg-layer">
+    <!-- 闪烁星星 -->
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    
+    <!-- 漂浮粒子 -->
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    
+    <!-- 流星 -->
+    <view class="shooting-star"></view>
+    <view class="shooting-star"></view>
+    <view class="shooting-star"></view>
+    
+    <!-- 月亮 -->
+    <view class="moon"></view>
+    
+    <!-- 旋转的塔罗符号 -->
+    <view class="tarot-symbol rotate">☽</view>
+    <view class="tarot-symbol rotate">☉</view>
+    <view class="tarot-symbol rotate">✦</view>
+    <view class="tarot-symbol rotate">✧</view>
+    <view class="tarot-symbol rotate">✶</view>
+    
+    <!-- 六芒星 -->
+    <view class="hexagram"></view>
+    <view class="hexagram"></view>
+    
+    <!-- 魔法阵 -->
+    <view class="magic-circle outer"></view>
+    <view class="magic-circle inner"></view>
+    <view class="magic-circle rotating"></view>
+    <view class="magic-cross"></view>
+    
+    <!-- 角落装饰 -->
+    <view class="corner-deco tl"></view>
+    <view class="corner-deco tr"></view>
+    <view class="corner-deco bl"></view>
+    <view class="corner-deco br"></view>
+    
+    <!-- 光晕效果 -->
+    <view class="glow glow-1"></view>
+    <view class="glow glow-2"></view>
+    <view class="glow glow-3"></view>
+  </view>
+
+  <view class="header">
+    <view class="tarot-title">
+      <view class="title-deco">· · ✦ · ·</view>
+      <view class="title-text">秘引塔罗</view>
+      <view class="title-subtext">专业测算工具</view>
+      <view class="title-line"></view>
+    </view>
+  </view>
+
+  <view class="content">
+    <view class="main-buttons">
+      <view class="button-wrapper" bindtap="goToDaily">
+        <view class="main-button">
+          <view class="btn-glow-top"></view>
+          <view class="button-icon-wrap">
+            <view class="btn-hex">🔮</view>
+          </view>
+          <view class="button-text">每日运势</view>
+          <view class="button-subtext">抽取今日运势牌</view>
+          <view class="btn-border-deco"></view>
+        </view>
+      </view>
+      <view class="button-wrapper" bindtap="startReading">
+        <view class="secondary-button">
+          <view class="btn-glow-top"></view>
+          <view class="button-icon-wrap">
+            <view class="btn-hex">🃏</view>
+          </view>
+          <view class="button-text">塔罗占卜</view>
+          <view class="button-subtext">输入问题，探索答案</view>
+          <view class="btn-border-deco"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="diviner-entry" bindtap="goToDiviner">
+      <view class="diviner-arrow">‹</view>
+      <view class="diviner-line-l">─────</view>
+      <view class="diviner-text">占卜师入口</view>
+      <view class="diviner-line-r">─────</view>
+      <view class="diviner-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="compliance-footer">
+    <view class="compliance-text">
+      温馨提示：本小程序测算结果仅供娱乐参考，不构成任何决策建议，请理性对待
+    </view>
+  </view>
+</view>

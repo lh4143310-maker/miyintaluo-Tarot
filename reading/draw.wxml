@@ -1,0 +1,72 @@
+<view class="container">
+  <view class="header">
+    <view class="title">选择您的牌</view>
+    <view class="subtitle">从25张牌中选择 {{needSelectCount}} 张</view>
+    <view class="progress">
+      <view class="progress-text">已选择 {{selectedCount}} / {{needSelectCount}} 张</view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{(selectedCount / needSelectCount) * 100}}%;"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5x5 牌阵网格 -->
+  <view class="grid-container">
+    <view class="cards-grid">
+      <view
+        class="grid-card {{item.selected ? 'selected' : ''}} {{isSelecting ? 'disabled' : ''}}"
+        wx:for="{{gridCards}}"
+        wx:key="gridIndex"
+        bindtap="selectGridCard"
+        data-index="{{item.gridIndex}}"
+        style="--row: {{item.row}}; --col: {{item.col}};"
+      >
+        <view class="card-inner">
+          <view class="card-back">
+            <view class="card-pattern">
+              <view class="pattern-star">✦</view>
+            </view>
+            <view class="card-number">{{item.gridIndex + 1}}</view>
+          </view>
+        </view>
+        <!-- 选中标记 -->
+        <view class="selected-mark" wx:if="{{item.selected}}">
+          <view class="mark-number">{{item.selectOrder + 1}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已选牌预览 -->
+  <view class="selected-preview" wx:if="{{selectedCount > 0}}">
+    <view class="preview-title">已选择的牌</view>
+    <view class="preview-list">
+      <view 
+        class="preview-card {{card ? 'filled' : 'empty'}}" 
+        wx:for="{{selectedCards}}" 
+        wx:key="index"
+      >
+        <view class="preview-number">{{index + 1}}</view>
+        <view class="preview-position" wx:if="{{spread.positions[index]}}">{{spread.positions[index].name}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="footer">
+    <view class="footer-hint" wx:if="{{!allSelected}}">
+      请点击上方牌背选择 {{needSelectCount}} 张牌
+    </view>
+    <view class="footer-hint complete" wx:if="{{allSelected}}">
+      ✓ 选择完成！可以查看结果了
+    </view>
+    <view class="footer-buttons">
+      <button class="action-btn reset-btn" bindtap="resetSelection" wx:if="{{selectedCount > 0}}">
+        重新选择
+      </button>
+      <button class="action-btn result-btn {{allSelected ? 'active' : 'disabled'}}" bindtap="goToResult">
+        {{allSelected ? '查看结果' : '还需选择 ' + (needSelectCount - selectedCount) + ' 张'}}
+      </button>
+    </view>
+  </view>
+</view>

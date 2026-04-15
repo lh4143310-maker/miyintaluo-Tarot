@@ -1,0 +1,116 @@
+<view class="container">
+  <!-- 动态背景装饰 -->
+  <view class="bg-layer">
+    <!-- 闪烁星星 -->
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view>
+    
+    <!-- 漂浮粒子 -->
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    
+    <!-- 流星 -->
+    <view class="shooting-star"></view>
+    <view class="shooting-star"></view>
+    
+    <!-- 太阳 -->
+    <view class="sun"></view>
+    
+    <!-- 旋转的塔罗符号 -->
+    <view class="tarot-symbol rotate">☉</view>
+    <view class="tarot-symbol rotate">☽</view>
+    <view class="tarot-symbol rotate">✦</view>
+    <view class="tarot-symbol rotate">✧</view>
+    
+    <!-- 六芒星 -->
+    <view class="hexagram"></view>
+    <view class="hexagram"></view>
+    
+    <!-- 魔法阵 -->
+    <view class="magic-circle outer"></view>
+    <view class="magic-circle inner"></view>
+    <view class="magic-circle rotating"></view>
+    
+    <!-- 角落装饰 -->
+    <view class="corner-deco tl"></view>
+    <view class="corner-deco tr"></view>
+    <view class="corner-deco bl"></view>
+    <view class="corner-deco br"></view>
+    
+    <!-- 光晕效果 -->
+    <view class="glow glow-1"></view>
+    <view class="glow glow-2"></view>
+    <view class="glow glow-3"></view>
+  </view>
+
+  <view class="header">
+    <view class="user-info" wx:if="{{userInfo}}">
+      <view class="avatar-wrapper" bindtap="chooseAvatar">
+        <view class="avatar-symbol" wx:if="{{!userInfo.avatarUrl}}">👤</view>
+        <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" wx:else />
+        <view class="avatar-edit">+</view>
+      </view>
+      <view class="user-detail">
+        <view class="nickname-wrapper">
+          <input class="nickname-input" value="{{userInfo.nickName}}" bindinput="onNicknameInput" placeholder="输入昵称" />
+          <view class="edit-icon">✎</view>
+        </view>
+        <view class="user-id">ID: {{userId}}</view>
+      </view>
+    </view>
+    <view class="login-prompt" wx:else bindtap="login">
+      <view class="login-icon">🔮</view>
+      <view class="login-text">微信一键登录</view>
+    </view>
+  </view>
+
+  <view class="menu-list">
+    <view class="menu-item" bindtap="goToHistory">
+      <view class="menu-icon">📜</view>
+      <view class="menu-text">历史记录</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="goToDiviner">
+      <view class="menu-icon">🔮</view>
+      <view class="menu-text">占卜师入口</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-divider"></view>
+    <view class="menu-item" bindtap="showAbout">
+      <view class="menu-icon">📖</view>
+      <view class="menu-text">关于我们</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="showCompliance">
+      <view class="menu-icon">⚖️</view>
+      <view class="menu-text">合规说明</view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="logout-section" wx:if="{{userInfo}}">
+    <view class="logout-btn" bindtap="logout">退出登录</view>
+  </view>
+
+  <view class="compliance-footer">
+    <view class="compliance-text">
+      温馨提示：本小程序测算结果仅供娱乐参考，不构成任何决策建议，请理性对待
+    </view>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showModal}}" bindtap="hideModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-title">{{modalTitle}}</view>
+    <view class="modal-body">
+      <view class="modal-text">{{modalContent}}</view>
+    </view>
+    <view class="modal-footer">
+      <view class="modal-btn" bindtap="hideModal">确定</view>
+    </view>
+  </view>
+</view>

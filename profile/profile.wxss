@@ -1,0 +1,548 @@
+/* ============================
+   个人中心页 - 深紫星空塔罗风格
+   ============================ */
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0d0820 0%, #1a0a3e 40%, #0d1a30 70%, #0d0820 100%);
+  padding-bottom: 200rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ——— 动态星座 Canvas ——— */
+.constellation-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ——— 背景装饰 ——— */
+.bg-layer {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 闪烁星星 */
+.star {
+  position: absolute;
+  width: 4rpx;
+  height: 4rpx;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10rpx 2rpx rgba(255,255,255,0.8);
+  animation: twinkle 3s ease-in-out infinite;
+}
+.star:nth-child(1) { top: 6%; left: 12%; animation-delay: 0s; }
+.star:nth-child(2) { top: 11%; right: 18%; width: 6rpx; height: 6rpx; animation-delay: 0.5s; }
+.star:nth-child(3) { top: 16%; left: 22%; animation-delay: 1s; }
+.star:nth-child(4) { top: 21%; right: 28%; animation-delay: 1.5s; }
+.star:nth-child(5) { top: 9%; left: 48%; width: 5rpx; height: 5rpx; animation-delay: 2s; }
+.star:nth-child(6) { top: 31%; left: 6%; animation-delay: 0.3s; }
+.star:nth-child(7) { top: 13%; right: 42%; animation-delay: 0.8s; }
+.star:nth-child(8) { top: 26%; left: 78%; width: 5rpx; height: 5rpx; animation-delay: 1.2s; }
+.star:nth-child(9) { top: 41%; right: 12%; animation-delay: 1.8s; }
+.star:nth-child(10) { top: 51%; left: 18%; animation-delay: 2.5s; }
+.star:nth-child(11) { top: 61%; right: 22%; width: 4rpx; height: 4rpx; animation-delay: 0.2s; }
+.star:nth-child(12) { top: 71%; left: 28%; animation-delay: 0.7s; }
+.star:nth-child(13) { top: 81%; right: 18%; animation-delay: 1.3s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* 漂浮粒子 */
+.particle {
+  position: absolute;
+  width: 6rpx;
+  height: 6rpx;
+  background: radial-gradient(circle, rgba(212,175,55,0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+.particle:nth-child(14) { top: 15%; left: 15%; animation-delay: 0s; }
+.particle:nth-child(15) { top: 55%; left: 25%; animation-delay: 1s; }
+.particle:nth-child(16) { top: 35%; left: 75%; animation-delay: 2s; }
+.particle:nth-child(17) { top: 75%; left: 65%; animation-delay: 3s; }
+.particle:nth-child(18) { top: 25%; left: 45%; animation-delay: 4s; }
+.particle:nth-child(19) { top: 85%; left: 35%; animation-delay: 5s; }
+.particle:nth-child(20) { top: 45%; left: 75%; animation-delay: 6s; }
+.particle:nth-child(21) { top: 5%; left: 65%; animation-delay: 7s; }
+.particle:nth-child(22) { top: 80%; left: 80%; animation-delay: 2.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+  25% { transform: translateY(-20rpx) translateX(10rpx); opacity: 0.8; }
+  50% { transform: translateY(-10rpx) translateX(-10rpx); opacity: 0.5; }
+  75% { transform: translateY(-30rpx) translateX(5rpx); opacity: 0.7; }
+}
+
+/* 流星 */
+.shooting-star {
+  position: absolute;
+  width: 100rpx;
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  animation: shoot 3s linear infinite;
+  opacity: 0;
+}
+.shooting-star:nth-child(23) { top: 15%; left: -100rpx; animation-delay: 0s; }
+.shooting-star:nth-child(24) { top: 45%; left: -100rpx; animation-delay: 7s; }
+
+@keyframes shoot {
+  0% { transform: translateX(0) rotate(-45deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(800rpx) rotate(-45deg); opacity: 0; }
+}
+
+/* 旋转的塔罗符号 */
+.tarot-symbol.rotate {
+  animation: rotate 20s linear infinite;
+}
+.tarot-symbol.rotate:nth-of-type(1) { animation-delay: 0s; }
+.tarot-symbol.rotate:nth-of-type(2) { animation-delay: -6s; }
+.tarot-symbol.rotate:nth-of-type(3) { animation-delay: -12s; }
+.tarot-symbol.rotate:nth-of-type(4) { animation-delay: -18s; }
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 旋转魔法阵 */
+.magic-circle.rotating {
+  animation: rotate 30s linear infinite;
+  border-style: dashed;
+  border-color: rgba(212,175,55,0.2);
+}
+
+/* 光晕效果 */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60rpx);
+  animation: pulse 4s ease-in-out infinite;
+}
+.glow-1 {
+  width: 280rpx;
+  height: 280rpx;
+  background: radial-gradient(circle, rgba(212,175,55,0.25) 0%, transparent 70%);
+  top: 15%;
+  right: 5%;
+  animation-delay: 0s;
+}
+.glow-2 {
+  width: 320rpx;
+  height: 320rpx;
+  background: radial-gradient(circle, rgba(106,13,173,0.3) 0%, transparent 70%);
+  bottom: 20%;
+  left: 5%;
+  animation-delay: 1.5s;
+}
+.glow-3 {
+  width: 250rpx;
+  height: 250rpx;
+  background: radial-gradient(circle, rgba(75,0,130,0.2) 0%, transparent 70%);
+  top: 50%;
+  right: 20%;
+  animation-delay: 3s;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* 太阳装饰 */
+.sun {
+  position: absolute;
+  top: 70rpx;
+  right: 60rpx;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent);
+  opacity: 0.6;
+}
+.sun::before {
+  content: '☉';
+  position: absolute;
+  font-size: 60rpx;
+  color: rgba(212, 175, 55, 0.2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 塔罗符号 */
+.tarot-symbol {
+  position: absolute;
+  font-size: 110rpx;
+  color: rgba(212, 175, 55, 0.04);
+  text-shadow: 0 0 30rpx rgba(212, 175, 55, 0.08);
+}
+.tarot-symbol:nth-of-type(1) { top: 18%; left: 6%; transform: rotate(-12deg); }
+.tarot-symbol:nth-of-type(2) { top: 58%; right: 6%; transform: rotate(18deg); }
+.tarot-symbol:nth-of-type(3) { bottom: 28%; left: 8%; transform: rotate(-8deg); }
+
+/* 六芒星 */
+.hexagram {
+  position: absolute;
+  width: 90rpx;
+  height: 90rpx;
+  opacity: 0.07;
+}
+.hexagram::before {
+  content: '✡';
+  position: absolute;
+  font-size: 90rpx;
+  color: #d4af37;
+  top: 0;
+  left: 0;
+}
+.hexagram:nth-of-type(1) { top: 38%; left: 4%; }
+.hexagram:nth-of-type(2) { bottom: 32%; right: 6%; transform: rotate(20deg); }
+
+.magic-circle {
+  position: absolute;
+  border-radius: 50%;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+}
+.magic-circle.outer {
+  width: 520rpx;
+  height: 520rpx;
+  border: 1rpx solid rgba(212, 175, 55, 0.08);
+}
+.magic-circle.inner {
+  width: 340rpx;
+  height: 340rpx;
+  border: 1rpx solid rgba(180, 120, 200, 0.1);
+}
+
+.corner-deco {
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+  opacity: 0.28;
+}
+.corner-deco.tl { top: 60rpx; left: 30rpx; border-top: 2rpx solid #d4af37; border-left: 2rpx solid #d4af37; }
+.corner-deco.tr { top: 60rpx; right: 30rpx; border-top: 2rpx solid #d4af37; border-right: 2rpx solid #d4af37; }
+.corner-deco.bl { bottom: 180rpx; left: 30rpx; border-bottom: 2rpx solid #d4af37; border-left: 2rpx solid #d4af37; }
+.corner-deco.br { bottom: 180rpx; right: 30rpx; border-bottom: 2rpx solid #d4af37; border-right: 2rpx solid #d4af37; }
+
+/* ——— 头部用户信息 ——— */
+.header {
+  padding: 80rpx 40rpx 30rpx;
+  position: relative;
+  z-index: 10;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(35, 12, 80, 0.95), rgba(20, 8, 50, 0.95));
+  border-radius: 24rpx;
+  padding: 40rpx;
+  border: 1rpx solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10rpx 40rpx rgba(80, 20, 160, 0.4), 0 0 0 1rpx rgba(212, 175, 55, 0.08) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-info::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1rpx;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+
+.avatar-wrapper {
+  position: relative;
+  margin-right: 30rpx;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 3rpx solid #d4af37;
+  box-shadow: 0 0 20rpx rgba(212, 175, 55, 0.4);
+}
+
+.avatar-symbol {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 3rpx solid #d4af37;
+  box-shadow: 0 0 20rpx rgba(212, 175, 55, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80rpx;
+  color: #d4af37;
+  background: linear-gradient(135deg, rgba(35, 12, 80, 0.9), rgba(20, 8, 50, 0.9));
+}
+
+.avatar-edit {
+  position: absolute;
+  bottom: 0; right: 0;
+  background: linear-gradient(135deg, #2d1060, #3d1878);
+  border: 2rpx solid #d4af37;
+  border-radius: 50%;
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  color: #f0d060;
+  box-shadow: 0 2rpx 10rpx rgba(212, 175, 55, 0.3);
+}
+
+.user-detail { flex: 1; }
+
+.nickname-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.nickname-input {
+  flex: 1;
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #f0d060;
+  background: transparent;
+  border: none;
+  outline: none;
+  letter-spacing: 2rpx;
+  text-shadow: 0 0 12rpx rgba(212, 175, 55, 0.3);
+}
+
+.nickname-input::placeholder {
+  color: #7060a0;
+}
+
+.edit-icon {
+  font-size: 26rpx;
+  margin-left: 12rpx;
+  color: #d4af37;
+  opacity: 0.7;
+}
+
+.user-id {
+  font-size: 22rpx;
+  color: #7060a0;
+}
+
+/* ——— 未登录提示 ——— */
+.login-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, rgba(35, 12, 80, 0.9), rgba(20, 8, 55, 0.9));
+  border: 1rpx solid rgba(212, 175, 55, 0.25);
+  border-radius: 24rpx;
+  padding: 60rpx 40rpx;
+  box-shadow: 0 10rpx 40rpx rgba(80, 20, 160, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-prompt::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1rpx;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+}
+
+.login-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+  color: #d4af37;
+  opacity: 0.7;
+  text-shadow: 0 0 20rpx rgba(212, 175, 55, 0.5);
+}
+
+.login-text {
+  font-size: 32rpx;
+  color: #f0d060;
+  font-weight: bold;
+  letter-spacing: 3rpx;
+  text-shadow: 0 0 12rpx rgba(212, 175, 55, 0.3);
+}
+
+/* ——— 菜单列表 ——— */
+.menu-list {
+  padding: 30rpx 40rpx 0;
+  position: relative;
+  z-index: 10;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(30, 10, 70, 0.85), rgba(20, 6, 50, 0.85));
+  border: 1rpx solid rgba(212, 175, 55, 0.18);
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(60, 15, 130, 0.2);
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 3rpx;
+  background: linear-gradient(180deg, transparent, #d4af37, transparent);
+  opacity: 0.4;
+  border-radius: 2rpx;
+}
+
+.menu-icon {
+  font-size: 34rpx;
+  margin-right: 25rpx;
+  color: #d4af37;
+  opacity: 0.85;
+  text-shadow: 0 0 10rpx rgba(212, 175, 55, 0.4);
+  width: 40rpx;
+  text-align: center;
+}
+
+.menu-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #c0a8e8;
+  letter-spacing: 2rpx;
+}
+
+.menu-arrow {
+  font-size: 36rpx;
+  color: #d4af37;
+  opacity: 0.6;
+}
+
+.menu-divider {
+  height: 1rpx;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
+  margin: 10rpx 0 20rpx;
+}
+
+/* ——— 退出按钮 ——— */
+.logout-section {
+  padding: 20rpx 40rpx;
+  position: relative;
+  z-index: 10;
+}
+
+.logout-btn {
+  background: rgba(20, 5, 50, 0.7);
+  border: 1rpx solid rgba(212, 175, 55, 0.2);
+  border-radius: 16rpx;
+  padding: 30rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #9080c0;
+  letter-spacing: 2rpx;
+}
+
+/* ——— 底部合规 ——— */
+.compliance-footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(8, 4, 20, 0.97);
+  padding: 20rpx 30rpx 30rpx;
+  border-top: 1rpx solid rgba(212, 175, 55, 0.1);
+  z-index: 100;
+}
+
+.compliance-text {
+  font-size: 20rpx;
+  color: #6050a0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ——— 弹窗 ——— */
+.modal-mask {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  width: 80%;
+  background: linear-gradient(145deg, #1a0a3e, #2a0d5e);
+  border-radius: 20rpx;
+  border: 2rpx solid #d4af37;
+  padding: 50rpx 40rpx;
+  box-shadow: 0 20rpx 80rpx rgba(100, 40, 180, 0.5), 0 0 0 1rpx rgba(212, 175, 55, 0.1) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1rpx;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #f0d060;
+  text-align: center;
+  margin-bottom: 30rpx;
+  letter-spacing: 3rpx;
+  text-shadow: 0 0 15rpx rgba(212, 175, 55, 0.5);
+}
+
+.modal-body { margin-bottom: 30rpx; }
+
+.modal-text {
+  font-size: 26rpx;
+  color: #c0a8e8;
+  line-height: 1.7;
+  margin-bottom: 20rpx;
+  text-align: left;
+  text-indent: 0;
+  white-space: pre-line;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-btn {
+  background: linear-gradient(135deg, #2d1060, #3d1878);
+  color: #f0d060;
+  border: 2rpx solid #d4af37;
+  border-radius: 50rpx;
+  padding: 20rpx 80rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 20rpx rgba(212, 175, 55, 0.2);
+}

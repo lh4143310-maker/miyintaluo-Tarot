@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="header">
+    <view class="title">自定义牌阵</view>
+    <view class="subtitle">管理您的专属牌阵</view>
+  </view>
+
+  <view class="content">
+    <view wx:if="{{!spreads.length}}" class="empty-state">
+      <view class="empty-icon">✦</view>
+      <view class="empty-text">暂无自定义牌阵</view>
+      <view class="empty-hint">点击下方按钮创建您的第一个牌阵</view>
+    </view>
+
+    <view wx:else class="spread-list">
+      <view class="spread-item" wx:for="{{spreads}}" wx:key="id" bindtap="viewSpread" data-spread="{{item}}">
+        <view class="spread-header">
+          <view class="spread-name">{{item.name}}</view>
+          <view class="spread-cards">{{item.cardCount}}张牌</view>
+        </view>
+        <view class="spread-positions">
+          <view class="position-tag" wx:for="{{item.positions}}" wx:key="index" wx:for-item="pos">
+            {{pos.name}}
+          </view>
+        </view>
+        <view class="spread-actions">
+          <view class="action-btn edit" bindtap="editSpread" data-spread="{{item}}">编辑</view>
+          <view class="action-btn delete" bindtap="deleteSpread" data-id="{{item.id}}">删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">
+    <button class="create-btn" bindtap="createSpread">创建新牌阵</button>
+  </view>
+
+  <view class="compliance-footer">
+    <view class="compliance-text">
+      温馨提示：本小程序测算结果仅供娱乐参考，不构成任何决策建议，请理性对待
+    </view>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showDetail}}" bindtap="hideDetail">
+  <view class="detail-modal" catchtap="stopPropagation">
+    <view class="detail-header">
+      <view class="detail-name">{{selectedSpread.name}}</view>
+      <view class="detail-cards">{{selectedSpread.cardCount}}张牌</view>
+    </view>
+    <view class="detail-positions">
+      <view class="position-item" wx:for="{{selectedSpread.positions}}" wx:key="index">
+        <view class="position-num">{{index + 1}}</view>
+        <view class="position-info">
+          <view class="position-name">{{item.name}}</view>
+          <view class="position-desc">{{item.description}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="detail-footer">
+      <button class="close-btn" bindtap="hideDetail">关闭</button>
+    </view>
+  </view>
+</view>

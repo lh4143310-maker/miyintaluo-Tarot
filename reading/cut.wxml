@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="header">
+    <view class="step-indicator">
+      <view class="step-item completed">✓</view>
+      <view class="step-line active"></view>
+      <view class="step-item completed">✓</view>
+      <view class="step-line active"></view>
+      <view class="step-item active">3</view>
+    </view>
+    <view class="step-text">切牌</view>
+  </view>
+
+  <view class="content">
+    <view class="hint">{{hint}}</view>
+    
+    <view class="deck-container">
+      <view class="deck-part top" style="transform: translateY({{cut ? -100 : 0}}rpx);">
+        <view class="deck-card" wx:for="{{10}}" wx:key="index" style="top: {{index * 3}}rpx; left: {{index * 1}}rpx;"></view>
+      </view>
+      <view class="deck-part bottom" style="transform: translateY({{cut ? 100 : 0}}rpx);">
+        <view class="deck-card" wx:for="{{12}}" wx:key="index" style="top: {{index * 3}}rpx; left: {{index * 1}}rpx;"></view>
+      </view>
+    </view>
+
+    <view class="cut-button" wx:if="{{!cut}}" bindtap="doCut">
+      <view class="cut-btn-text">点击切牌</view>
+    </view>
+  </view>
+
+  <view class="footer" wx:if="{{cut}}">
+    <button class="next-btn" bindtap="nextStep">进入抽牌</button>
+  </view>
+</view>

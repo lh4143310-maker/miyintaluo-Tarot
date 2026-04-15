@@ -1,0 +1,100 @@
+<view class="container">
+  <view class="header">
+    <view class="title">每日运势</view>
+    <view class="date">{{today}}</view>
+  </view>
+
+  <view wx:if="{{!drawn}}" class="draw-area">
+    <view class="draw-hint">{{animating ? '正在抽取...' : '点击下方卡牌抽取今日运势'}}</view>
+    <view class="card-deck" bindtap="drawCard">
+      <view class="deck-card {{animating ? 'shuffling' : ''}}" wx:for="{{5}}" wx:key="index" style="top: {{index * 5}}rpx; left: {{index * 2}}rpx; animation-delay: {{index * 0.1}}s;"></view>
+      <view class="deck-label {{animating ? 'hidden' : ''}}">点击抽牌</view>
+    </view>
+  </view>
+
+  <view wx:if="{{drawn}}" class="result-area">
+    <view class="result-card {{showResult ? 'flip-in' : ''}}">
+      <view class="card-image">
+        <image class="card-img {{showResult ? 'reveal' : ''}} {{card.isReversed ? 'rotate' : ''}}" src="{{card.image}}" mode="aspectFill"></image>
+      </view>
+      <view class="card-main">
+        <view class="card-name">{{card.name}}</view>
+        <view class="card-en">{{card.nameEn}}</view>
+        <view class="card-position {{card.isReversed ? 'reversed' : ''}}">
+          {{card.isReversed ? '逆位' : '正位'}}
+        </view>
+      </view>
+    </view>
+
+    <view class="meaning-section">
+      <view class="section-title">今日运势</view>
+      <view class="meaning-text">{{card.meaning}}</view>
+    </view>
+
+    <view class="interpretation-section">
+      <view class="section-title">牌面解读</view>
+      <view class="interpretation-text">{{card.isReversed ? card.reversed : card.upright}}</view>
+    </view>
+
+    <!-- AI 深度解读 -->
+    <view class="ai-report-section">
+      <view class="section-title ai-title" bindtap="toggleAIReport">
+        <text>AI 深度解读</text>
+        <view class="toggle-icon {{showAIReport ? 'open' : ''}}">v</view>
+      </view>
+      
+      <!-- 加载状态 -->
+      <view class="ai-loading" wx:if="{{loadingAI}}">
+        <view class="loading-spinner"></view>
+        <view class="loading-text">AI 正在为您解读今日运势...</view>
+      </view>
+      
+      <!-- AI 报告内容 -->
+      <view class="ai-report-content {{showAIReport ? 'show' : ''}}" wx:if="{{!loadingAI}}">
+        <view class="ai-report-text" wx:if="{{aiReport}}">{{aiReport}}</view>
+        <view class="ai-report-placeholder" wx:if="{{!aiReport}}">
+          <view class="placeholder-text">AI 解读加载失败</view>
+        </view>
+      </view>
+      
+      <!-- 进一步咨询 -->
+      <view class="consult-section" wx:if="{{aiReport && !loadingAI}}">
+        <view class="consult-title">还想了解更多？</view>
+        <view class="consult-input-area">
+          <textarea 
+            class="consult-input" 
+            placeholder="输入您想进一步了解的问题，例如：今天适合做什么投资？"
+            value="{{consultQuestion}}"
+            bindinput="onConsultInput"
+            maxlength="200"
+          />
+          <button class="consult-btn {{consultQuestion ? 'active' : ''}} {{loadingConsult ? 'loading' : ''}}" bindtap="sendConsult" disabled="{{loadingConsult}}">
+            {{loadingConsult ? 'AI 思考中...' : '向 AI 提问'}}
+          </button>
+        </view>
+        
+        <!-- 咨询历史 -->
+        <view class="consult-history" wx:if="{{consultHistory.length > 0}}">
+          <view class="history-title">咨询记录</view>
+          <view class="history-list">
+            <view class="history-item" wx:for="{{consultHistory}}" wx:key="index">
+              <view class="history-question">问：{{item.question}}</view>
+              <view class="history-answer">答：<text class="answer-text">{{item.answer}}</text></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="actions">
+      <button class="action-btn history-btn" bindtap="viewHistory">查看历史运势</button>
+      <button class="action-btn retry-btn" bindtap="reDraw">明日再来</button>
+    </view>
+  </view>
+
+  <view class="compliance-footer">
+    <view class="compliance-text">
+      温馨提示：本小程序测算结果仅供娱乐参考，不构成任何决策建议，请理性对待
+    </view>
+  </view>
+</view>

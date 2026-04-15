@@ -1,0 +1,66 @@
+<view class="container">
+  <view class="header">
+    <view class="step-indicator">
+      <view class="step-item completed">✓</view>
+      <view class="step-line active"></view>
+      <view class="step-item active">2</view>
+      <view class="step-line"></view>
+      <view class="step-item">3</view>
+    </view>
+    <view class="step-text">洗牌</view>
+  </view>
+
+  <view class="content">
+    <view class="status-hint {{isShuffling ? 'shuffling' : ''}} {{shuffled ? 'completed' : ''}}">{{hint}}</view>
+    
+    <!-- 牌堆区域 - 用户触摸交互 -->
+    <view class="cards-container" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd">
+      <view
+        class="deck-card {{isShuffling ? 'active' : ''}} {{shuffled ? 'completed' : ''}}"
+        wx:for="{{cards}}"
+        wx:key="index"
+        style="transform: rotate({{item.rotation}}deg) translate({{item.x}}rpx, {{item.y}}rpx) scale({{item.scale}}); z-index: {{item.zIndex}};"
+      >
+        <view class="card-back">
+          <view class="card-pattern">✦</view>
+        </view>
+      </view>
+      
+      <!-- 触摸提示 -->
+      <view class="touch-hint" wx:if="{{!shuffled && !isShuffling}}">
+        <view class="touch-icon">👆</view>
+        <view class="touch-text">长按或滑动洗牌</view>
+      </view>
+    </view>
+
+    <!-- 洗牌进度 -->
+    <view class="shuffle-progress">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{shuffleProgress}}%;"></view>
+      </view>
+      <view class="progress-text">
+        <text class="progress-label">洗牌进度</text>
+        <text class="progress-value">{{shuffleCount}} / {{needShuffleCount}}</text>
+      </view>
+    </view>
+    
+    <!-- 操作提示 -->
+    <view class="operation-hints" wx:if="{{!shuffled}}">
+      <view class="hint-item">
+        <view class="hint-dot"></view>
+        <view class="hint-desc">长按牌堆开始洗牌</view>
+      </view>
+      <view class="hint-item">
+        <view class="hint-dot"></view>
+        <view class="hint-desc">滑动屏幕加速洗牌</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="footer">
+    <button class="next-btn {{shuffled ? 'active' : 'disabled'}}" bindtap="nextStep">
+      {{shuffled ? '开始抽牌' : '请先完成洗牌'}}
+    </button>
+  </view>
+</view>

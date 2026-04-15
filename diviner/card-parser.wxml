@@ -1,0 +1,68 @@
+<view class="container">
+  <view class="search-section">
+    <input
+      class="search-input"
+      placeholder="搜索牌名..."
+      value="{{searchText}}"
+      bindinput="onSearchInput"
+    />
+  </view>
+
+  <view class="cards-list">
+    <view class="card-item" wx:for="{{filteredCards}}" wx:key="id" bindtap="showCardDetail" data-card="{{item}}">
+      <view class="card-image">
+        <image wx:if="{{item.image}}" class="card-img" src="{{item.image}}" mode="aspectFill"></image>
+        <view wx:else class="card-placeholder-sm">
+          <view class="placeholder-sm-deco">✦</view>
+          <view class="placeholder-sm-name">{{item.name}}</view>
+        </view>
+      </view>
+      <view class="card-main">
+        <view class="card-name">{{item.name}}</view>
+        <view class="card-type">{{item.type}}</view>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+  </view>
+</view>
+
+<view class="modal-mask" wx:if="{{showDetail}}" bindtap="hideDetail">
+  <view class="detail-modal" catchtap="stopPropagation">
+    <scroll-view class="detail-content" scroll-y>
+      <view class="detail-header">
+        <view class="card-image-large">
+          <image wx:if="{{selectedCard.image}}" class="card-img-large" src="{{selectedCard.image}}" mode="aspectFill"></image>
+          <view wx:else class="card-placeholder-lg">
+            <view class="placeholder-lg-top-line"></view>
+            <view class="placeholder-lg-deco">✦</view>
+            <view class="placeholder-lg-name">{{selectedCard.name}}</view>
+            <view class="placeholder-lg-en">{{selectedCard.nameEn}}</view>
+            <view class="placeholder-lg-bottom-line"></view>
+          </view>
+        </view>
+        <view class="detail-name">{{selectedCard.name}}</view>
+        <view class="detail-en">{{selectedCard.nameEn}}</view>
+        <view class="detail-type">{{selectedCard.type}}</view>
+      </view>
+
+      <view class="detail-section">
+        <view class="section-title">基础含义</view>
+        <view class="section-content">{{selectedCard.meaning}}</view>
+      </view>
+
+      <view class="detail-section">
+        <view class="section-title upright">正位解析</view>
+        <view class="section-content">{{selectedCard.upright}}</view>
+      </view>
+
+      <view class="detail-section">
+        <view class="section-title reversed">逆位解析</view>
+        <view class="section-content">{{selectedCard.reversed}}</view>
+      </view>
+    </scroll-view>
+    <view class="detail-footer">
+      <view class="close-btn back-btn" wx:if="{{fromResult}}" bindtap="goBack">返回结果</view>
+      <view class="close-btn" bindtap="hideDetail">{{fromResult ? '查看其他牌' : '关闭'}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,62 @@
+<scroll-view class="container" scroll-y>
+  <view class="header">
+    <view class="title">{{isEdit ? '编辑牌阵' : '创建牌阵'}}</view>
+  </view>
+
+  <view class="form-section">
+    <view class="field">
+      <view class="field-label">牌阵名称</view>
+      <input
+        class="field-input"
+        placeholder="请输入牌阵名称"
+        value="{{spreadName}}"
+        bindinput="onNameInput"
+      />
+    </view>
+
+    <view class="field">
+      <view class="field-label">牌数</view>
+      <view class="card-count-selector">
+        <view
+          class="count-option {{cardCount === item ? 'active' : ''}}"
+          wx:for="{{[1,2,3,4,5,6,7,8,9,10]}}"
+          wx:key="*this"
+          bindtap="selectCardCount"
+          data-count="{{item}}"
+        >
+          {{item}}
+        </view>
+      </view>
+    </view>
+
+    <view class="positions-section">
+      <view class="section-title">每张牌的含义</view>
+      <view class="position-list">
+        <view class="position-item" wx:for="{{positions}}" wx:key="index">
+          <view class="position-header">
+            <view class="position-num">第{{index + 1}}张</view>
+          </view>
+          <input
+            class="position-input"
+            placeholder="位置名称（如：过去）"
+            value="{{item.name}}"
+            bindinput="onPositionNameInput"
+            data-index="{{index}}"
+          />
+          <input
+            class="position-input desc"
+            placeholder="含义描述（可选）"
+            value="{{item.description}}"
+            bindinput="onPositionDescInput"
+            data-index="{{index}}"
+          />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="actions">
+    <button class="action-btn cancel" bindtap="cancel">取消</button>
+    <button class="action-btn save" bindtap="save" disabled="{{!canSave}}">保存</button>
+  </view>
+</scroll-view>

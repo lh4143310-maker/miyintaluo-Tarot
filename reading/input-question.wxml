@@ -1,0 +1,119 @@
+<view class="container">
+  <view class="header">
+    <view class="step-indicator">
+      <view class="step-item active">1</view>
+      <view class="step-line"></view>
+      <view class="step-item">2</view>
+      <view class="step-line"></view>
+      <view class="step-item">3</view>
+    </view>
+    <view class="step-text">输入问题</view>
+  </view>
+
+  <view class="content">
+    <view class="card">
+      <view class="card-title">请输入您的问题</view>
+      <view class="card-hint">问题越明确，测算越精准</view>
+      <textarea
+        class="question-input"
+        placeholder="请输入明确可测算的问题，例如：我的事业近期会有什么发展？"
+        value="{{question}}"
+        bindinput="onQuestionInput"
+        maxlength="200"
+        auto-focus
+      />
+      <view class="char-count">{{question.length}}/200</view>
+    </view>
+
+    <view class="spread-selector">
+      <view class="section-header">
+        <view class="section-title">选择牌阵</view>
+        <view class="spread-actions">
+          <view class="action-link" bindtap="createCustomSpread">
+            <text class="action-icon">✨</text>
+            <text class="action-text">创建牌阵</text>
+          </view>
+          <view class="action-link" bindtap="manageCustomSpreads" wx:if="{{spreads.length > 3}}">
+            <text class="action-icon">⚙️</text>
+            <text class="action-text">管理</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="spread-list">
+        <view
+          class="spread-item {{selectedSpread.id === item.id ? 'active' : ''}} {{item.isBuiltin ? 'builtin' : 'custom'}}"
+          wx:for="{{spreads}}"
+          wx:key="id"
+          bindtap="selectSpread"
+          data-spread="{{item}}"
+        >
+          <view class="spread-header">
+            <view class="spread-name">{{item.name}}</view>
+            <view class="spread-badge" wx:if="{{!item.isBuiltin}}">自定义</view>
+          </view>
+          <view class="spread-info">
+            <view class="spread-cards">{{item.cardCount}}张牌</view>
+            <view class="spread-suitable">{{item.suitableFor}}</view>
+          </view>
+          <view class="spread-desc">{{item.description}}</view>
+          <view class="spread-detail-btn" catchtap="viewSpreadDetail" data-spread="{{item}}">
+            <text class="detail-text">查看详情</text>
+            <text class="detail-arrow">›</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 牌阵详情弹窗 -->
+    <view class="spread-detail-modal" wx:if="{{showSpreadDetail}}" bindtap="closeSpreadDetail">
+      <view class="modal-content" catchtap="stopPropagation">
+        <view class="modal-header">
+          <view class="modal-title">{{viewingSpread.name}}</view>
+          <view class="modal-close" bindtap="closeSpreadDetail">×</view>
+        </view>
+        <view class="modal-body">
+          <view class="detail-section">
+            <view class="detail-label">牌阵类型</view>
+            <view class="detail-value">{{viewingSpread.isBuiltin ? '内置牌阵' : '自定义牌阵'}} · {{viewingSpread.cardCount}}张牌</view>
+          </view>
+          <view class="detail-section">
+            <view class="detail-label">适用场景</view>
+            <view class="detail-value">{{viewingSpread.suitableFor}}</view>
+          </view>
+          <view class="detail-section">
+            <view class="detail-label">牌阵说明</view>
+            <view class="detail-desc">{{viewingSpread.description}}</view>
+          </view>
+          <view class="detail-section">
+            <view class="detail-label">牌位布局</view>
+            <view class="positions-list">
+              <view class="position-item" wx:for="{{viewingSpread.positions}}" wx:key="index">
+                <view class="position-number">{{index + 1}}</view>
+                <view class="position-info">
+                  <view class="position-name">{{item.name}}</view>
+                  <view class="position-desc">{{item.description}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="modal-footer">
+          <button class="select-btn {{selectedSpread.id === viewingSpread.id ? 'selected' : ''}}" bindtap="selectFromDetail">
+            {{selectedSpread.id === viewingSpread.id ? '当前已选' : '选择此牌阵'}}
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">
+    <button
+      class="next-btn {{question ? '' : 'disabled'}}"
+      bindtap="nextStep"
+      disabled="{{!question}}"
+    >
+      下一步
+    </button>
+  </view>
+</view>

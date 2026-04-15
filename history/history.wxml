@@ -1,0 +1,112 @@
+<view class="container">
+  <!-- 动态背景装饰 -->
+  <view class="bg-layer">
+    <!-- 闪烁星星 -->
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    <view class="star"></view><view class="star"></view><view class="star"></view>
+    
+    <!-- 漂浮粒子 -->
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    <view class="particle"></view><view class="particle"></view><view class="particle"></view>
+    
+    <!-- 流星 -->
+    <view class="shooting-star"></view>
+    <view class="shooting-star"></view>
+    
+    <!-- 月亮 -->
+    <view class="moon"></view>
+    
+    <!-- 旋转的塔罗符号 -->
+    <view class="tarot-symbol rotate">☽</view>
+    <view class="tarot-symbol rotate">✦</view>
+    <view class="tarot-symbol rotate">✧</view>
+    
+    <!-- 六芒星 -->
+    <view class="hexagram"></view>
+    <view class="hexagram"></view>
+    
+    <!-- 魔法阵 -->
+    <view class="magic-circle outer"></view>
+    <view class="magic-circle inner"></view>
+    <view class="magic-circle rotating"></view>
+    
+    <!-- 角落装饰 -->
+    <view class="corner-deco tl"></view>
+    <view class="corner-deco tr"></view>
+    
+    <!-- 光晕效果 -->
+    <view class="glow glow-1"></view>
+    <view class="glow glow-2"></view>
+  </view>
+
+  <view class="header">
+    <view class="title-deco">· ✦ ·</view>
+    <view class="title">历史记录</view>
+    <view class="tabs">
+      <view
+        class="tab-item {{activeTab === 'all' ? 'active' : ''}}"
+        bindtap="switchTab"
+        data-tab="all"
+      >
+        全部
+      </view>
+      <view
+        class="tab-item {{activeTab === 'reading' ? 'active' : ''}}"
+        bindtap="switchTab"
+        data-tab="reading"
+      >
+        测算
+      </view>
+      <view
+        class="tab-item {{activeTab === 'daily' ? 'active' : ''}}"
+        bindtap="switchTab"
+        data-tab="daily"
+      >
+        每日运势
+      </view>
+    </view>
+  </view>
+
+  <view class="content">
+    <view wx:if="{{!userInfo && filteredHistory.length > 0}}" class="login-tip">
+      <view class="tip-text">登录后可同步历史记录</view>
+      <view class="tip-btn" bindtap="goToLogin">去登录</view>
+    </view>
+
+    <view wx:if="{{filteredHistory.length === 0}}" class="empty-state">
+      <view class="empty-icon">✦</view>
+      <view class="empty-text">暂无历史记录</view>
+    </view>
+
+    <view wx:else class="history-list">
+      <view class="history-item" wx:for="{{filteredHistory}}" wx:key="id">
+        <view class="item-main" bindtap="viewDetail" data-item="{{item}}">
+          <view class="item-header">
+            <view class="item-type">{{item.type === 'reading' ? '塔罗测算' : '每日运势'}}</view>
+            <view class="item-time">{{item.time}}</view>
+          </view>
+          <view class="item-content">
+            <view class="item-question" wx:if="{{item.question}}">{{item.question}}</view>
+            <view class="item-spread" wx:if="{{item.spreadName}}">牌阵：{{item.spreadName}}</view>
+            <view class="item-cards" wx:if="{{item.cardSummary}}">
+              <view class="cards-label">抽牌结果：</view>
+              <view class="cards-value">{{item.cardSummary}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="item-delete" bindtap="deleteItem" data-id="{{item.id}}" data-type="{{item.type}}">
+          <view class="delete-icon">✕</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="compliance-footer">
+    <view class="compliance-text">
+      温馨提示：本小程序测算结果仅供娱乐参考，不构成任何决策建议，请理性对待
+    </view>
+  </view>
+</view>

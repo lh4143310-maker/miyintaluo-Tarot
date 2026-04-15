@@ -1,0 +1,127 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a0a2e 100%);
+  padding-bottom: 200rpx;
+}
+
+.header {
+  padding: 60rpx 40rpx 40rpx;
+  text-align: center;
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+
+.step-item {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #8a8a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.step-item.active {
+  background: linear-gradient(135deg, #6a0dad 0%, #4b0082 100%);
+  color: #d4af37;
+  box-shadow: 0 0 20rpx rgba(106, 13, 173, 0.5);
+}
+
+.step-item.completed {
+  background: #d4af37;
+  color: #0a0a0a;
+}
+
+.step-line {
+  width: 100rpx;
+  height: 2rpx;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.step-line.active {
+  background: linear-gradient(90deg, #d4af37, rgba(255, 255, 255, 0.1));
+}
+
+.step-text {
+  font-size: 28rpx;
+  color: #d4af37;
+}
+
+.content {
+  padding: 0 40rpx;
+}
+
+.hint {
+  text-align: center;
+  font-size: 32rpx;
+  color: #e0e0e0;
+  margin-bottom: 80rpx;
+}
+
+.deck-container {
+  position: relative;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deck-part {
+  position: absolute;
+  transition: transform 0.5s ease;
+}
+
+.deck-card {
+  position: absolute;
+  width: 160rpx;
+  height: 240rpx;
+  background: linear-gradient(135deg, #2d004d 0%, #1a0a2e 100%);
+  border-radius: 16rpx;
+  border: 3rpx solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.5);
+}
+
+.cut-button {
+  margin-top: 60rpx;
+  text-align: center;
+}
+
+.cut-btn-text {
+  display: inline-block;
+  padding: 30rpx 80rpx;
+  background: linear-gradient(135deg, #6a0dad 0%, #4b0082 100%);
+  color: #fff;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  box-shadow: 0 10rpx 30rpx rgba(106, 13, 173, 0.4);
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30rpx 40rpx;
+  background: linear-gradient(180deg, transparent, #0a0a0a);
+}
+
+.next-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #6a0dad 0%, #4b0082 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50rpx;
+  padding: 28rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  box-shadow: 0 10rpx 30rpx rgba(106, 13, 173, 0.4);
+}
