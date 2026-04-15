@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/history/history",
+    "pages/profile/profile"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/reading",
+      "pages": [
+        "input-question",
+        "shuffle",
+        "cut",
+        "draw",
+        "result"
+      ]
+    },
+    {
+      "root": "pages/daily",
+      "pages": [
+        "daily"
+      ]
+    },
+    {
+      "root": "pages/diviner",
+      "pages": [
+        "diviner",
+        "card-parser",
+        "custom-spread",
+        "create-spread"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0a0a0a",
+    "navigationBarTitleText": "秘引塔罗",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0a0a0a"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#8a8a8a",
+    "selectedColor": "#d4af37",
+    "backgroundColor": "#0a0a0a",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "记录"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

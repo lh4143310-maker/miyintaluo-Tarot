@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0d060;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8960c;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 背景星星 -->
+  <g fill="#d4af37" opacity="0.6">
+    <circle cx="50" cy="40" r="2" filter="url(#glow)"/>
+    <circle cx="100" cy="25" r="3" filter="url(#glow)"/>
+    <circle cx="150" cy="50" r="2" filter="url(#glow)"/>
+    <circle cx="450" cy="30" r="3" filter="url(#glow)"/>
+    <circle cx="500" cy="45" r="2" filter="url(#glow)"/>
+    <circle cx="550" cy="35" r="2.5" filter="url(#glow)"/>
+  </g>
+  
+  <!-- 左侧人物 - 男性侧脸朝左 -->
+  <g stroke="url(#gold)" stroke-width="1.5" fill="none" opacity="0.7" filter="url(#glow)">
+    <!-- 头部轮廓 -->
+    <path d="M 180 80 
+             Q 160 85 155 100 
+             Q 150 115 155 130
+             Q 160 145 175 150
+             Q 190 155 200 145
+             Q 210 135 215 120
+             Q 220 105 215 90
+             Q 210 75 195 70
+             Q 185 68 180 80 Z"/>
+    
+    <!-- 额头线条 -->
+    <path d="M 180 80 Q 175 95 178 110" stroke-width="1"/>
+    
+    <!-- 鼻子 -->
+    <path d="M 155 115 Q 148 120 152 128" stroke-width="1"/>
+    
+    <!-- 嘴唇 -->
+    <path d="M 158 138 Q 155 142 160 145" stroke-width="1"/>
+    
+    <!-- 下巴 -->
+    <path d="M 165 148 Q 170 155 180 152" stroke-width="1"/>
+    
+    <!-- 颈部 -->
+    <path d="M 185 150 Q 188 170 185 190"/>
+    <path d="M 200 145 Q 205 165 210 185"/>
+    
+    <!-- 头发 - 卷发效果 -->
+    <path d="M 185 70 Q 170 60 160 70 Q 150 80 155 95" stroke-width="1.2"/>
+    <path d="M 195 68 Q 185 55 175 65 Q 165 75 170 90" stroke-width="1"/>
+    <path d="M 210 75 Q 205 60 195 68" stroke-width="1"/>
+    <path d="M 215 90 Q 220 80 215 70 Q 210 60 200 65" stroke-width="1"/>
+    
+    <!-- 肩膀 -->
+    <path d="M 165 185 Q 140 195 130 220 Q 125 240 130 260"/>
+    <path d="M 210 180 Q 230 190 240 210 Q 250 230 245 250"/>
+    
+    <!-- 衣领装饰 -->
+    <path d="M 170 190 Q 180 200 190 195" stroke-width="1"/>
+    <path d="M 175 205 Q 185 215 195 210" stroke-width="1"/>
+  </g>
+  
+  <!-- 右侧人物 - 女性侧脸朝右 -->
+  <g stroke="url(#gold)" stroke-width="1.5" fill="none" opacity="0.7" filter="url(#glow)">
+    <!-- 头部轮廓 -->
+    <path d="M 420 80 
+             Q 440 85 445 100 
+             Q 450 115 445 130
+             Q 440 145 425 150
+             Q 410 155 400 145
+             Q 390 135 385 120
+             Q 380 105 385 90
+             Q 390 75 405 70
+             Q 415 68 420 80 Z"/>
+    
+    <!-- 额头线条 -->
+    <path d="M 420 80 Q 425 95 422 110" stroke-width="1"/>
+    
+    <!-- 鼻子 -->
+    <path d="M 445 115 Q 452 120 448 128" stroke-width="1"/>
+    
+    <!-- 嘴唇 -->
+    <path d="M 442 138 Q 445 142 440 145" stroke-width="1"/>
+    
+    <!-- 下巴 -->
+    <path d="M 435 148 Q 430 155 420 152" stroke-width="1"/>
+    
+    <!-- 颈部 -->
+    <path d="M 415 150 Q 412 170 415 190"/>
+    <path d="M 400 145 Q 395 165 390 185"/>
+    
+    <!-- 头发 - 长发效果 -->
+    <path d="M 415 70 Q 430 55 445 65 Q 455 80 450 100" stroke-width="1.2"/>
+    <path d="M 405 68 Q 420 50 435 60 Q 445 75 440 95" stroke-width="1"/>
+    <path d="M 390 75 Q 400 55 415 65" stroke-width="1"/>
+    <path d="M 385 90 Q 380 75 388 60 Q 395 50 408 58" stroke-width="1"/>
+    <!-- 长发飘逸 -->
+    <path d="M 448 95 Q 460 120 455 150 Q 450 180 440 200" stroke-width="1"/>
+    <path d="M 440 100 Q 450 125 445 155" stroke-width="1"/>
+    
+    <!-- 皇冠/头饰 -->
+    <path d="M 405 65 L 410 55 L 415 65" stroke-width="1"/>
+    <path d="M 415 65 L 420 52 L 425 65" stroke-width="1"/>
+    <path d="M 425 65 L 430 55 L 435 68" stroke-width="1"/>
+    
+    <!-- 肩膀 -->
+    <path d="M 435 185 Q 460 195 470 220 Q 475 240 470 260"/>
+    <path d="M 390 180 Q 370 190 360 210 Q 350 230 355 250"/>
+    
+    <!-- 衣领装饰 -->
+    <path d="M 430 190 Q 420 200 410 195" stroke-width="1"/>
+    <path d="M 425 205 Q 415 215 405 210" stroke-width="1"/>
+  </g>
+  
+  <!-- 中心连接装饰 -->
+  <g stroke="url(#gold)" stroke-width="2" fill="none" opacity="0.8" filter="url(#glow)">
+    <circle cx="300" cy="150" r="15"/>
+    <circle cx="300" cy="150" r="8"/>
+    <line x1="300" y1="135" x2="300" y2="120" stroke-width="1"/>
+    <line x1="300" y1="165" x2="300" y2="180" stroke-width="1"/>
+    <line x1="285" y1="150" x2="270" y2="150" stroke-width="1"/>
+    <line x1="315" y1="150" x2="330" y2="150" stroke-width="1"/>
+    <!-- 四角星 -->
+    <path d="M 300 130 L 303 147 L 320 150 L 303 153 L 300 170 L 297 153 L 280 150 L 297 147 Z" fill="#d4af37"/>
+  </g>
+  
+  <!-- 星座连线装饰 -->
+  <g stroke="#d4af37" stroke-width="0.8" opacity="0.4">
+    <!-- 左侧星座线 -->
+    <line x1="80" y1="60" x2="120" y2="90"/>
+    <line x1="120" y1="90" x2="100" y2="130"/>
+    <line x1="100" y1="130" x2="140" y2="150"/>
+    
+    <!-- 右侧星座线 -->
+    <line x1="520" y1="60" x2="480" y2="90"/>
+    <line x1="480" y1="90" x2="500" y2="130"/>
+    <line x1="500" y1="130" x2="460" y2="150"/>
+  </g>
+  
+  <!-- 四角装饰星星 -->
+  <g fill="#d4af37" opacity="0.5">
+    <polygon points="30,30 32,36 38,36 33,40 35,46 30,42 25,46 27,40 22,36 28,36"/>
+    <polygon points="570,30 572,36 578,36 573,40 575,46 570,42 565,46 567,40 562,36 568,36"/>
+    <polygon points="30,270 32,276 38,276 33,280 35,286 30,282 25,286 27,280 22,276 28,276"/>
+    <polygon points="570,270 572,276 578,276 573,280 575,286 570,282 565,286 567,280 562,276 568,276"/>
+  </g>
+</svg>
